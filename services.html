@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NexSale — Services</title>
+<link rel="icon" href="./favicon.png" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cyan: #00d4c8; --magenta: #e0006e; --purple: #7b2fff;
+    --dark: #09090f; --dark2: #111120; --dark3: #181830;
+    --text: #e8e8f0; --muted: #8888aa;
+    --grad: linear-gradient(135deg, var(--cyan), var(--purple), var(--magenta));
+    --grad2: linear-gradient(135deg, var(--magenta), var(--purple));
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--dark); color: var(--text); overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 14px 6%; background: rgba(9,9,15,0.9); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .logo-wrap img { height: 52px; width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0,212,200,0.3)); }
+  nav ul { list-style: none; display: flex; gap: 36px; }
+  nav ul a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.03em; transition: color 0.2s; }
+  nav ul a:hover, nav ul a.active { color: var(--cyan); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 26px; border-radius: 8px; font-family: var(--font-body); font-weight: 700; font-size: 0.88rem; cursor: pointer; text-decoration: none; border: none; transition: all 0.25s; }
+  .btn-primary { background: var(--grad2); color: #fff; box-shadow: 0 0 24px rgba(123,47,255,0.4); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(123,47,255,0.65); }
+
+  /* PAGE HERO */
+  .page-hero {
+    padding: 160px 6% 80px; position: relative; overflow: hidden;
+    background: var(--dark2);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .page-hero::before {
+    content:''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 80% 50%, rgba(123,47,255,0.15), transparent 70%),
+                radial-gradient(ellipse 40% 50% at 10% 60%, rgba(0,212,200,0.1), transparent 60%);
+  }
+  .page-hero-content { position: relative; z-index: 1; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 14px; }
+  .page-hero h1 { font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .page-hero h1 span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .page-hero p { color: var(--muted); font-size: 1.1rem; line-height: 1.72; max-width: 580px; font-weight: 300; }
+
+  /* SERVICES DETAIL */
+  section { padding: 80px 6%; }
+  .service-block {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;
+    padding: 80px 6%; border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+  .service-block:nth-child(even) { direction: rtl; }
+  .service-block:nth-child(even) > * { direction: ltr; }
+  .service-block:last-child { border-bottom: none; }
+  .svc-num-large { font-family: var(--font-display); font-size: 6rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; opacity: 0.2; line-height: 1; margin-bottom: 10px; }
+  .svc-title { font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: 0.03em; font-weight: 400; margin-bottom: 16px; }
+  .svc-desc { color: var(--muted); line-height: 1.72; font-size: 0.95rem; font-weight: 300; margin-bottom: 24px; }
+  .feat-list { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 28px; }
+  .feat-list li { display: flex; align-items: center; gap: 12px; font-size: 0.9rem; color: var(--muted); }
+  .feat-list li::before { content:'✓'; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,212,200,0.12); color: var(--cyan); display: flex; align-items: center; justify-content: center; font-size: 0.72rem; flex-shrink: 0; }
+
+  .svc-visual {
+    background: linear-gradient(135deg, var(--dark3), var(--dark2));
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 24px;
+    padding: 40px; min-height: 300px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: space-between;
+  }
+  .svc-visual::before { content:''; position: absolute; top: -60px; right: -60px; width: 200px; height: 200px; border-radius: 50%; background: radial-gradient(circle, rgba(123,47,255,0.25), transparent 70%); }
+  .visual-icon { font-size: 3.5rem; margin-bottom: 20px; }
+  .visual-stat-row { display: flex; gap: 20px; }
+  .visual-stat { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.07); border-radius: 12px; padding: 16px 20px; flex: 1; }
+  .visual-stat .v-num { font-family: var(--font-display); font-size: 2rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .visual-stat .v-label { font-size: 0.75rem; color: var(--muted); margin-top: 2px; }
+
+  /* PRICING */
+  .pricing-section { background: var(--dark2); }
+  .pricing-section h2 { font-family: var(--font-display); font-size: clamp(2.4rem,5vw,4rem); letter-spacing: 0.03em; margin-bottom: 10px; }
+  .pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+  .pricing-card { background: var(--dark); border: 1px solid rgba(255,255,255,0.08); border-radius: 20px; padding: 36px; position: relative; overflow: hidden; transition: transform 0.3s; }
+  .pricing-card:hover { transform: translateY(-6px); }
+  .pricing-card.featured { border-color: rgba(123,47,255,0.5); background: linear-gradient(135deg, rgba(123,47,255,0.1), rgba(0,212,200,0.05)); }
+  .pricing-card.featured::before { content: 'MOST POPULAR'; position: absolute; top: 20px; right: -28px; background: var(--grad2); color: #fff; font-size: 0.62rem; font-weight: 700; letter-spacing: 0.12em; padding: 4px 36px; transform: rotate(35deg); }
+  .plan-name { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.06em; color: var(--cyan); margin-bottom: 8px; }
+  .plan-price { font-family: var(--font-display); font-size: 3.2rem; margin-bottom: 6px; }
+  .plan-price span { font-size: 1rem; font-family: var(--font-body); color: var(--muted); font-weight: 400; }
+  .plan-desc { font-size: 0.85rem; color: var(--muted); margin-bottom: 24px; line-height: 1.6; }
+  .plan-feats { list-style: none; display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .plan-feats li { font-size: 0.87rem; color: var(--muted); display: flex; align-items: center; gap: 8px; }
+  .plan-feats li::before { content:'✓'; color: var(--cyan); font-weight: 700; }
+
+  /* FOOTER */
+  footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 6% 36px; }
+  .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 0.88rem; color: var(--muted); line-height: 1.72; margin-top: 14px; margin-bottom: 20px; }
+  .footer-brand img { height: 44px; width: auto; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0,212,200,0.25)); }
+  .social-links { display: flex; gap: 10px; }
+  .social-link { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; font-size: 0.75rem; font-weight: 700; transition: all 0.2s; }
+  .social-link:hover { background: var(--purple); color: #fff; }
+  footer h4 { font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.08em; margin-bottom: 18px; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  footer ul a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  footer ul a:hover { color: var(--cyan); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--muted); }
+
+  .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 960px) {
+    nav ul { display: none; }
+    .service-block { grid-template-columns: 1fr; direction: ltr; gap: 40px; }
+    .pricing-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-wrap"><img src="logo.jpeg" alt="NexSale"/></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html" class="active">Services</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="btn btn-primary">Get Started →</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-content fade-up">
+    <div class="section-label">Our Services</div>
+    <h1>Revenue Systems<br><span>That Scale.</span></h1>
+    <p>We don't just run campaigns. We build complete lead-generation and automation systems that work for your business around the clock.</p>
+  </div>
+</div>
+
+<!-- SERVICE 1 -->
+<div class="service-block fade-up">
+  <div>
+    <div class="svc-num-large">01</div>
+    <div class="svc-title">GMB Optimization</div>
+    <p class="svc-desc">When people search for your service, they click the top 3 results—not page 2. We optimize your Google Business Profile to rank higher and convert local traffic into calls and bookings.</p>
+    <ul class="feat-list">
+      <li>Full GMB Optimization (NAP, categories, keywords)</li>
+      <li>Geo-targeted posts & content strategy</li>
+      <li>Review generation + automation</li>
+      <li>Citation building across directories</li>
+      <li>Ongoing ranking optimization</li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary">Get My GMB Optimized →</a>
+  </div>
+  <div class="svc-visual">
+    <div class="visual-icon">📍</div>
+    <div>
+      <p style="font-size:0.75rem;color:var(--muted);margin-bottom:12px;text-transform:uppercase;letter-spacing:0.1em">Ranking Results</p>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:20px;font-size:0.75rem;color:var(--muted)">#1</span><div style="flex:1;height:8px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden"><div style="width:95%;height:100%;background:var(--grad);border-radius:4px"></div></div><span style="font-size:0.72rem;color:var(--cyan)">NexSale Client</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:20px;font-size:0.75rem;color:var(--muted)">#2</span><div style="flex:1;height:8px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden"><div style="width:70%;height:100%;background:linear-gradient(135deg,var(--purple),var(--magenta));border-radius:4px"></div></div><span style="font-size:0.72rem;color:var(--muted)">Competitor A</span></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:20px;font-size:0.75rem;color:var(--muted)">#3</span><div style="flex:1;height:8px;background:rgba(255,255,255,0.05);border-radius:4px;overflow:hidden"><div style="width:48%;height:100%;background:rgba(255,255,255,0.15);border-radius:4px"></div></div><span style="font-size:0.72rem;color:var(--muted)">Competitor B</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 2 -->
+<div class="service-block fade-up" style="background:var(--dark2)">
+  <div>
+    <div class="svc-num-large">02</div>
+    <div class="svc-title">Social Media Management</div>
+    <p class="svc-desc">Turn your social media into a consistent lead generation machine with strategic content, short-form videos, and engagement systems that convert followers into paying clients.</p>
+    <ul class="feat-list">
+      <li>Content strategy & calendar planning</li>
+      <li>Short-form video production (Reels, TikTok)</li>
+      <li>Community engagement & DM funnels</li>
+      <li>Paid social ad management</li>
+      <li>Monthly performance reporting</li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary">Grow My Social →</a>
+  </div>
+  <div class="svc-visual">
+    <div class="visual-icon">📱</div>
+    <div class="visual-stat-row">
+      <div class="visual-stat"><div class="v-num">5X</div><div class="v-label">Engagement Boost</div></div>
+      <div class="visual-stat"><div class="v-num">300%</div><div class="v-label">More Reach</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 3 -->
+<div class="service-block fade-up">
+  <div>
+    <div class="svc-num-large">03</div>
+    <div class="svc-title">SEO Services</div>
+    <p class="svc-desc">Drive high-intent organic traffic that converts into real customers through proven technical and content strategies that build long-term, compounding growth.</p>
+    <ul class="feat-list">
+      <li>Technical SEO audit & fixes</li>
+      <li>Keyword research & content strategy</li>
+      <li>On-page & off-page optimization</li>
+      <li>Local SEO for service area businesses</li>
+      <li>Link building & authority growth</li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary">Rank Higher Today →</a>
+  </div>
+  <div class="svc-visual">
+    <div class="visual-icon">📈</div>
+    <div class="visual-stat-row">
+      <div class="visual-stat"><div class="v-num">90</div><div class="v-label">Days to Rank</div></div>
+      <div class="visual-stat"><div class="v-num">200%</div><div class="v-label">Traffic Growth</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 4 -->
+<div class="service-block fade-up" style="background:var(--dark2)">
+  <div>
+    <div class="svc-num-large">04</div>
+    <div class="svc-title">AI Assistants</div>
+    <p class="svc-desc">We build AI-powered assistants that instantly respond to inquiries, qualify leads, and book appointments automatically—so you never miss a lead again.</p>
+    <ul class="feat-list">
+      <li>Custom AI chatbot development</li>
+      <li>24/7 lead qualification & response</li>
+      <li>Appointment booking automation</li>
+      <li>CRM integration & data capture</li>
+      <li>Multi-channel deployment (web, SMS, IG)</li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary">Get My AI Assistant →</a>
+  </div>
+  <div class="svc-visual">
+    <div class="visual-icon">🤖</div>
+    <div style="background:rgba(0,212,200,0.05);border:1px solid rgba(0,212,200,0.2);border-radius:12px;padding:16px">
+      <p style="font-size:0.8rem;color:var(--cyan);margin-bottom:8px">AI Bot — Live</p>
+      <p style="font-size:0.85rem;color:var(--muted);line-height:1.6">"Hi! I'm NexBot. I can help you book a free strategy call. What service are you interested in?"</p>
+    </div>
+  </div>
+</div>
+
+<!-- SERVICE 5 -->
+<div class="service-block fade-up">
+  <div>
+    <div class="svc-num-large">05</div>
+    <div class="svc-title">SaaS Business System</div>
+    <p class="svc-desc">Our all-in-one platform helps you manage your entire customer journey—from lead capture to closing deals—with full pipeline visibility and automation built in.</p>
+    <ul class="feat-list">
+      <li>Full CRM & pipeline management</li>
+      <li>Email & SMS marketing automation</li>
+      <li>Landing page & funnel builder</li>
+      <li>Reputation management tools</li>
+      <li>Analytics & reporting dashboard</li>
+    </ul>
+    <a href="contact.html" class="btn btn-primary">Try the Platform →</a>
+  </div>
+  <div class="svc-visual">
+    <div class="visual-icon">⚙️</div>
+    <div class="visual-stat-row">
+      <div class="visual-stat"><div class="v-num">1</div><div class="v-label">Platform</div></div>
+      <div class="visual-stat"><div class="v-num">∞</div><div class="v-label">Automation</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- PRICING -->
+<section class="pricing-section fade-up">
+  <div class="section-label">Pricing</div>
+  <h2>Simple, Transparent Pricing</h2>
+  <p style="color:var(--muted);max-width:500px;line-height:1.72;font-weight:300">No hidden fees. No long-term lock-ins. Just results-driven systems built for your business.</p>
+  <div class="pricing-grid">
+    <div class="pricing-card">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">$500 - $800 <span>/ mo</span></div>
+      <p class="plan-desc">Perfect for small businesses getting started with digital marketing.</p>
+      <ul class="plan-feats">
+        <li>GMB Optimization</li>
+        <li>Basic SEO Setup</li>
+        <li>Social Media (2 posts/week)</li>
+        <li>Monthly Report</li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center">Get Started →</a>
+    </div>
+    <div class="pricing-card featured">
+      <div class="plan-name">Growth</div>
+      <div class="plan-price">$1,200 - $2,000 <span>/ mo</span></div>
+      <p class="plan-desc">For growing businesses ready to scale with automation and AI.</p>
+      <ul class="plan-feats">
+        <li>Everything in Starter</li>
+        <li>AI Chatbot Setup</li>
+        <li>Full CRM + Automations</li>
+        <li>Social Media (5 posts/week)</li>
+        <li>Bi-weekly Strategy Calls</li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center">Get Started →</a>
+    </div>
+    <div class="pricing-card">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">$2,500 - $5,000+ / Custom <span>/ mo</span></div>
+      <p class="plan-desc">Full-service, white-glove marketing and automation for scaling teams.</p>
+      <ul class="plan-feats">
+        <li>Everything in Growth</li>
+        <li>Custom SaaS Setup</li>
+        <li>Paid Ads Management</li>
+        <li>Dedicated Account Manager</li>
+        <li>Weekly Strategy Calls</li>
+      </ul>
+      <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center">Book a Call →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <img src="logo.jpeg" alt="NexSale"/>
+      <p>Helping businesses capture, nurture, and close more leads through AI and automation—24/7.</p>
+      <div class="social-links"><a href="#" class="social-link">f</a><a href="#" class="social-link">in</a><a href="#" class="social-link">▶</a></div>
+    </div>
+    <div><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="services.html">GMB Optimization</a></li><li><a href="services.html">Social Media</a></li><li><a href="services.html">SEO Services</a></li><li><a href="services.html">AI Assistants</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="mailto:hello@nexsale.com">hello@nexsale.com</a></li><li><a href="#">+63 912 000 0000</a></li><li><a href="#">Metro Manila, PH</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 NexSale Digital Marketing. All Rights Reserved.</span>
+    <span style="display:flex;gap:20px"><a href="#" style="color:var(--muted);text-decoration:none">Privacy Policy</a><a href="#" style="color:var(--muted);text-decoration:none">Terms of Use</a></span>
+  </div>
+</footer>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>

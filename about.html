@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>NexSale — About</title>
+<link rel="icon" href="./favicon.png" type="image/x-icon">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --cyan: #00d4c8; --magenta: #e0006e; --purple: #7b2fff;
+    --dark: #09090f; --dark2: #111120; --dark3: #181830;
+    --text: #e8e8f0; --muted: #8888aa;
+    --grad: linear-gradient(135deg, var(--cyan), var(--purple), var(--magenta));
+    --grad2: linear-gradient(135deg, var(--magenta), var(--purple));
+    --font-display: 'Bebas Neue', sans-serif;
+    --font-body: 'Outfit', sans-serif;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); background: var(--dark); color: var(--text); overflow-x: hidden; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 14px 6%; background: rgba(9,9,15,0.9); backdrop-filter: blur(18px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .logo-wrap img { height: 52px; width: auto; object-fit: contain; filter: drop-shadow(0 0 10px rgba(0,212,200,0.3)); }
+  nav ul { list-style: none; display: flex; gap: 36px; }
+  nav ul a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: color 0.2s; }
+  nav ul a:hover, nav ul a.active { color: var(--cyan); }
+  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 11px 26px; border-radius: 8px; font-family: var(--font-body); font-weight: 700; font-size: 0.88rem; cursor: pointer; text-decoration: none; border: none; transition: all 0.25s; }
+  .btn-primary { background: var(--grad2); color: #fff; box-shadow: 0 0 24px rgba(123,47,255,0.4); }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 40px rgba(123,47,255,0.65); }
+
+  /* PAGE HERO */
+  .page-hero {
+    padding: 160px 6% 80px; position: relative; overflow: hidden; background: var(--dark2);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .page-hero::before {
+    content:''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 20% 50%, rgba(0,212,200,0.1), transparent 70%),
+                radial-gradient(ellipse 50% 60% at 90% 30%, rgba(224,0,110,0.1), transparent 60%);
+  }
+  .page-hero-content { position: relative; z-index: 1; }
+  .section-label { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--cyan); font-weight: 700; margin-bottom: 14px; }
+  .page-hero h1 { font-family: var(--font-display); font-size: clamp(3.5rem, 8vw, 6.5rem); line-height: 0.95; letter-spacing: 0.02em; margin-bottom: 20px; }
+  .page-hero h1 span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .page-hero p { color: var(--muted); font-size: 1.1rem; line-height: 1.72; max-width: 600px; font-weight: 300; }
+
+  /* STORY */
+  .story-section { padding: 100px 6%; }
+  .story-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+  .story-section h2 { font-family: var(--font-display); font-size: clamp(2.4rem,5vw,4rem); letter-spacing: 0.03em; margin-bottom: 20px; line-height: 1.0; }
+  .story-section h2 span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .story-section p { color: var(--muted); line-height: 1.78; font-weight: 300; font-size: 0.95rem; margin-bottom: 16px; }
+  .story-visual {
+    background: linear-gradient(135deg, var(--dark3), var(--dark2));
+    border: 1px solid rgba(255,255,255,0.08); border-radius: 24px; padding: 48px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    min-height: 360px; position: relative; overflow: hidden; text-align: center;
+  }
+  .story-visual::before { content:''; position: absolute; inset: 0; background: radial-gradient(circle at 60% 30%, rgba(123,47,255,0.2), transparent 60%); }
+  .story-visual img { width: 160px; height: auto; object-fit: contain; position: relative; z-index: 1; filter: drop-shadow(0 0 30px rgba(0,212,200,0.4)); margin-bottom: 20px; }
+  .story-visual p { position: relative; z-index: 1; color: var(--muted); font-size: 0.85rem; line-height: 1.6; max-width: 220px; }
+
+  /* VALUES */
+  .values-section { background: var(--dark2); padding: 100px 6%; }
+  .values-section h2 { font-family: var(--font-display); font-size: clamp(2.4rem,5vw,4rem); letter-spacing: 0.03em; margin-bottom: 10px; }
+  .values-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; margin-top: 48px; }
+  .value-card { background: var(--dark); border: 1px solid rgba(255,255,255,0.07); border-radius: 18px; padding: 32px; position: relative; overflow: hidden; transition: all 0.3s; }
+  .value-card:hover { border-color: rgba(0,212,200,0.4); transform: translateY(-4px); }
+  .value-icon { font-size: 2.5rem; margin-bottom: 16px; }
+  .value-card h3 { font-family: var(--font-display); font-size: 1.5rem; letter-spacing: 0.04em; margin-bottom: 10px; }
+  .value-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+  /* STATS */
+  .stats-section { padding: 80px 6%; }
+  .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; background: rgba(255,255,255,0.06); border-radius: 20px; overflow: hidden; }
+  .stat-box { background: var(--dark2); padding: 48px 32px; text-align: center; }
+  .stat-num { font-family: var(--font-display); font-size: 3.5rem; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; letter-spacing: 0.03em; }
+  .stat-label { font-size: 0.85rem; color: var(--muted); margin-top: 6px; font-weight: 400; }
+
+  /* TEAM */
+  .team-section { background: var(--dark2); padding: 100px 6%; }
+  .team-section h2 { font-family: var(--font-display); font-size: clamp(2.4rem,5vw,4rem); letter-spacing: 0.03em; margin-bottom: 10px; }
+  .team-grid { display: grid; grid-template-columns: repeat(2,1fr); gap: 28px; margin-top: 48px; max-width: 860px; }
+  .team-card { background: var(--dark); border: 1px solid rgba(255,255,255,0.07); border-radius: 22px; padding: 36px 32px; transition: all 0.3s; display: flex; flex-direction: column; }
+  .team-card:hover { border-color: rgba(123,47,255,0.4); transform: translateY(-4px); }
+  .team-header { display: flex; align-items: center; gap: 18px; margin-bottom: 20px; }
+  .team-avatar { width: 64px; height: 64px; border-radius: 50%; background: var(--grad); flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.05em; }
+  .team-info h4 { font-family: var(--font-display); font-size: 1.4rem; letter-spacing: 0.04em; margin-bottom: 3px; }
+  .team-info span { font-size: 0.78rem; color: var(--cyan); font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; }
+  .team-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+  .tag { font-size: 0.72rem; font-weight: 600; padding: 4px 11px; border-radius: 20px; background: rgba(123,47,255,0.15); color: var(--purple); border: 1px solid rgba(123,47,255,0.25); }
+  .tag.cyan { background: rgba(0,212,200,0.1); color: var(--cyan); border-color: rgba(0,212,200,0.25); }
+  .team-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.68; }
+
+  /* FAQ */
+  .faq-section { padding: 100px 6%; }
+  .faq-section h2 { font-family: var(--font-display); font-size: clamp(2.4rem,5vw,4rem); letter-spacing: 0.03em; margin-bottom: 48px; text-align: center; }
+  .faq-list { max-width: 720px; margin: 0 auto; }
+  .faq-item { border-bottom: 1px solid rgba(255,255,255,0.07); }
+  .faq-q { width: 100%; background: none; border: none; color: var(--text); font-family: var(--font-display); font-size: 1.2rem; letter-spacing: 0.04em; padding: 22px 0; text-align: left; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 20px; }
+  .faq-icon { font-size: 1.4rem; color: var(--cyan); flex-shrink: 0; transition: transform 0.3s; }
+  .faq-item.open .faq-icon { transform: rotate(45deg); }
+  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.4s ease; }
+  .faq-a p { padding: 0 0 22px; font-size: 0.9rem; color: var(--muted); line-height: 1.7; }
+  .faq-item.open .faq-a { max-height: 200px; }
+
+  /* CTA */
+  .cta-banner { background: var(--dark2); padding: 100px 6%; text-align: center; position: relative; overflow: hidden; }
+  .cta-banner::before { content:''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 70% at 50% 50%, rgba(123,47,255,0.14), transparent 70%); }
+  .cta-inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+  .cta-inner h2 { font-family: var(--font-display); font-size: clamp(2.6rem,5vw,4.2rem); letter-spacing: 0.03em; margin-bottom: 16px; }
+  .cta-inner p { color: var(--muted); font-size: 1.05rem; line-height: 1.7; margin-bottom: 36px; }
+
+  /* FOOTER */
+  footer { background: var(--dark); border-top: 1px solid rgba(255,255,255,0.06); padding: 60px 6% 36px; }
+  .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+  .footer-brand p { font-size: 0.88rem; color: var(--muted); line-height: 1.72; margin-top: 14px; margin-bottom: 20px; }
+  .footer-brand img { height: 44px; width: auto; object-fit: contain; filter: drop-shadow(0 0 8px rgba(0,212,200,0.25)); }
+  .social-links { display: flex; gap: 10px; }
+  .social-link { width: 36px; height: 36px; border-radius: 8px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; color: var(--muted); text-decoration: none; font-size: 0.75rem; font-weight: 700; transition: all 0.2s; }
+  .social-link:hover { background: var(--purple); color: #fff; }
+  footer h4 { font-family: var(--font-display); font-size: 1rem; letter-spacing: 0.08em; margin-bottom: 18px; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  footer ul a { color: var(--muted); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+  footer ul a:hover { color: var(--cyan); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 28px; display: flex; justify-content: space-between; align-items: center; font-size: 0.82rem; color: var(--muted); }
+
+  .fade-up { opacity: 0; transform: translateY(32px); transition: opacity 0.65s ease, transform 0.65s ease; }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 960px) {
+    nav ul { display: none; }
+    .story-inner { grid-template-columns: 1fr; gap: 40px; }
+    .values-grid { grid-template-columns: 1fr 1fr; }
+    .team-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .footer-bottom { flex-direction: column; gap: 10px; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="logo-wrap"><img src="logo.jpeg" alt="NexSale"/></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <a href="contact.html" class="btn btn-primary">Get Started →</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-content fade-up">
+    <div class="section-label">Our Story</div>
+    <h1>We Build Systems<br><span>That Sell.</span></h1>
+    <p>NexSale was built on one belief: great businesses deserve marketing systems that work as hard as they do. We're not just an agency—we're a growth partner.</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="story-section">
+  <div class="story-inner">
+    <div class="fade-up">
+      <div class="section-label">Our Mission</div>
+      <h2>Built to Solve<br><span>One Problem</span></h2>
+      <p>Businesses across the Philippines and the world are losing leads every single day—not because their product isn't good, but because their systems are broken. Slow follow-ups, disconnected tools, and no automation mean missed revenue.</p>
+      <p>NexSale was created to fix exactly that. We combine AI, automation, and proven marketing strategies into complete revenue systems that capture leads, nurture them, and convert them into paying clients—24 hours a day.</p>
+      <p>From local shops in Manila to e-commerce brands scaling globally, we build the systems that power consistent, predictable growth.</p>
+    </div>
+    <div class="story-visual fade-up">
+      <img src="logo.jpeg" alt="NexSale"/>
+      <p>AI-Powered Marketing for Businesses That Mean Business</p>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section fade-up">
+  <div class="stats-grid">
+    <div class="stat-box"><div class="stat-num">500+</div><div class="stat-label">Clients Served</div></div>
+    <div class="stat-box"><div class="stat-num">3X</div><div class="stat-label">Average Lead Increase</div></div>
+    <div class="stat-box"><div class="stat-num">₱2B+</div><div class="stat-label">Revenue Generated</div></div>
+    <div class="stat-box"><div class="stat-num">98%</div><div class="stat-label">Client Retention Rate</div></div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values-section">
+  <div class="section-label">Our Values</div>
+  <h2>What We Stand For</h2>
+  <p style="color:var(--muted);max-width:500px;line-height:1.72;font-weight:300;margin-top:10px">The principles that guide every system we build and every client we serve.</p>
+  <div class="values-grid fade-up">
+    <div class="value-card">
+      <div class="value-icon">🎯</div>
+      <h3>Results First</h3>
+      <p>We don't care about vanity metrics. Every system we build is measured against one thing: does it drive real business growth?</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">⚡</div>
+      <h3>Speed & Clarity</h3>
+      <p>We move fast, communicate clearly, and deliver systems that work within weeks—not months of meetings and strategy decks.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤝</div>
+      <h3>True Partnership</h3>
+      <p>We're not a vendor you hire—we're a growth partner invested in your success. When you win, we win.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🔬</div>
+      <h3>Data-Driven</h3>
+      <p>Every decision is backed by data. We test, iterate, and optimize so your marketing dollars go further every month.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🤖</div>
+      <h3>AI-First Thinking</h3>
+      <p>We leverage cutting-edge AI and automation to build systems that scale without proportionally scaling your costs.</p>
+    </div>
+    <div class="value-card">
+      <div class="value-icon">🌏</div>
+      <h3>Local Expertise</h3>
+      <p>Based in Metro Manila, we understand the Philippine market deeply—giving local businesses a serious competitive edge.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="section-label">The Team</div>
+  <h2>The People Behind NexSale</h2>
+  <p style="color:var(--muted);max-width:500px;line-height:1.72;font-weight:300;margin-top:10px">Two founders. One shared obsession: building systems that generate real, measurable growth for every client.</p>
+  <div class="team-grid fade-up">
+
+    <div class="team-card">
+      <div class="team-header">
+        <div class="team-avatar">JM</div>
+        <div class="team-info">
+          <h4>Joshua Mendoza</h4>
+          <span>Founder & CEO</span>
+        </div>
+      </div>
+      <div class="team-tags">
+        <span class="tag cyan">AI Automation</span>
+        <span class="tag">GHL Expert</span>
+        <span class="tag cyan">Ads Specialist</span>
+        <span class="tag">Web Development</span>
+      </div>
+      <p>With 3 years of freelance experience across AI automation, GoHighLevel, paid ads, and web development, Joshua architects the end-to-end growth systems that power NexSale's client results. He turns complex tech stacks into revenue machines.</p>
+    </div>
+
+    <div class="team-card">
+      <div class="team-header">
+        <div class="team-avatar">JM</div>
+        <div class="team-info">
+          <h4>Jonathan Mendoza</h4>
+          <span>Co-Founder & Head of Growth</span>
+        </div>
+      </div>
+      <div class="team-tags">
+        <span class="tag cyan">Sales Strategy</span>
+        <span class="tag">Amazon Specialist</span>
+        <span class="tag cyan">E-Commerce</span>
+      </div>
+      <p>Jonathan brings a sharp sales instinct and 2 years of deep Amazon expertise to the table. He leads client growth strategy and e-commerce scaling, ensuring every system NexSale builds is optimized not just to generate leads—but to close them.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-list fade-up">
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How is NexSale different from other agencies?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>We focus on full systems—not just marketing. That means lead capture, automation, CRM integration, and closing workflows all working together for consistent revenue.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">How fast can I see results?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>Paid traffic and automation can generate leads within days. SEO and GMB optimization typically take 30–90 days to show significant ranking improvements.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Do you only work with Philippine businesses?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>No. While we're based in Metro Manila, we work with local businesses, national brands, and international clients across various industries and markets.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">What does your onboarding process look like?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>After your free strategy call, we conduct a full audit of your current setup, build a custom game plan, and launch your first automation system within 2 weeks.</p></div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q" onclick="toggleFaq(this)">Is there a long-term contract?<span class="faq-icon">+</span></button>
+      <div class="faq-a"><p>No long-term lock-ins. We believe in earning your business month after month through results. Most clients stay because they see consistent ROI.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-banner">
+  <div class="cta-inner fade-up">
+    <div class="section-label" style="text-align:center">Work With Us</div>
+    <h2>Ready to Build Your<br>Growth System?</h2>
+    <p>Book a free 30-minute strategy call and let's map out exactly how we can help your business capture and convert more leads.</p>
+    <a href="contact.html" class="btn btn-primary">Book a Free Strategy Call →</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand"><img src="logo.jpeg" alt="NexSale"/><p>Helping businesses capture, nurture, and close more leads through AI and automation—24/7.</p><div class="social-links"><a href="#" class="social-link">f</a><a href="#" class="social-link">in</a><a href="#" class="social-link">▶</a></div></div>
+    <div><h4>Pages</h4><ul><li><a href="index.html">Home</a></li><li><a href="services.html">Services</a></li><li><a href="about.html">About</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+    <div><h4>Services</h4><ul><li><a href="services.html">GMB Optimization</a></li><li><a href="services.html">Social Media</a></li><li><a href="services.html">SEO Services</a></li><li><a href="services.html">AI Assistants</a></li></ul></div>
+    <div><h4>Contact</h4><ul><li><a href="mailto:hello@nexsale.com">hello@nexsale.com</a></li><li><a href="#">+63 912 000 0000</a></li><li><a href="#">Metro Manila, PH</a></li></ul></div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 NexSale Digital Marketing. All Rights Reserved.</span>
+    <span style="display:flex;gap:20px"><a href="#" style="color:var(--muted);text-decoration:none">Privacy Policy</a><a href="#" style="color:var(--muted);text-decoration:none">Terms of Use</a></span>
+  </div>
+</footer>
+
+<script>
+function toggleFaq(btn) { btn.closest('.faq-item').classList.toggle('open'); }
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
